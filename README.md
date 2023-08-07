@@ -1,1 +1,2 @@
 # Musical-Music
+An app that uses spotify Api to search and listen to music. Users will be able to organize their favorite music into lists add songs to favorites and get recommendations based on their favorite songs. Users can also view other users lists or allow other users to see their lists.
