@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import "./form.css"
 
 const Login = () => {
+    const [register, setRegister] = useState(false)
+    const registerClick = () => {
+        setRegister(!register)
+    }
     return(
         <div>
             <Form
@@ -24,6 +28,19 @@ const Login = () => {
                 >
                     <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                 </Form.Item>
+                {register != false ? (<>
+                    <Form.Item
+                        name="Email"
+                        rules={[
+                        {
+                            required: true,
+                            message: 'Please input your Email!',
+                        },
+                        ]}
+                    >
+                        <Input prefix={<MailOutlined className="site-form-item-icon" />} placeholder="Email" />
+                    </Form.Item>
+                </>):<></>}
                 <Form.Item
                     name="password"
                     rules={[
@@ -39,17 +56,26 @@ const Login = () => {
                     placeholder="Password"
                     />
                 </Form.Item>
-                <Form.Item>
-                    <a className="login-form-forgot" href="">
-                    Forgot password ?
-                    </a>
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </Button>
-                    Or <a href="">register now!</a>
-                </Form.Item>
+                {register != true ? (<>
+                    <Form.Item>
+                        <a href="">
+                            Forgot password ?
+                        </a>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                        Or <a onClick={registerClick}>register now!</a>
+                    </Form.Item>
+                </>):(<>
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Register
+                        </Button>
+                        Or <a onClick={registerClick}>Login now!</a>
+                    </Form.Item>
+                </>)}
             </Form>
         </div>
     )
